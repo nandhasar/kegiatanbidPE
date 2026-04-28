@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kalender Bapenda Lombok Tengah</title>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 20px; background-color: #f4f7f6; }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        header { text-align: center; margin-bottom: 30px; }
+        
+        /* Modal Styling */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: white; margin: 10% auto; padding: 20px; border-radius: 8px; width: 400px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-header { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        
+        .btn-group { text-align: right; margin-top: 20px; }
+        .btn-save { background-color: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .btn-cancel { background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 10px; }
+
+        /* Event Colors */
+        .event-pemeriksaan { background-color: #e74c3c !important; border-color: #e74c3c !important; }
+        .event-sosialisasi { background-color: #3498db !important; border-color: #3498db !important; }
+        .event-evaluasi { background-color: #2ecc71 !important; border-color: #2ecc71 !important; }
+        .event-default { background-color: #9b59b6 !important; border-color: #9b59b6 !important; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h2>📅 Kalender Kegiatan Bidang Pengendalian & Evaluasi</h2>
+            <p>Bapenda Kabupaten Lombok Tengah</p>
+        </header>
+        <div id='calendar'></div>
+    </div>
+
+    <!-- Popup Modal Form -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Tambah Kegiatan Baru</div>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label>Nama Kegiatan</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Mulai</label>
+                    <input type="date" id="start" required>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Selesai</label>
+                    <input type="date" id="end">
+                </div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="category">
+                        <option value="Pemeriksaan">Pemeriksaan</option>
+                        <option value="Sosialisasi">Sosialisasi</option>
+                        <option value="Evaluasi">Evaluasi</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Keterangan</label>
+                    <textarea id="description" rows="3"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let calendar;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listMonth'
+                },
+                selectable: true, // Mengaktifkan fitur pilih tanggal
+                locale: 'id',
+                
+                // EVENT: Saat tanggal diklik/dipilih
+                select: function(info) {
+                    openModal(info.startStr, info.endStr);
+                },
+
+                // Load data dari Apps Script
+                events: function(fetchInfo, successCallback, failureCallback) {
+                    google.script.run.withSuccessHandler(function(events) {
+                        const formatted = events.map(ev => {
+                            let colorClass = 'event-default';
+                            if(ev.category === 'Pemeriksaan') colorClass = 'event-pemeriksaan';
+                            if(ev.category === 'Sosialisasi') colorClass = 'event-sosialisasi';
+                            if(ev.category === 'Evaluasi') colorClass = 'event-evaluasi';
+                            return {
+                                title: ev.title,
+                                start: ev.start,
+                                end: ev.end,
+                                className: colorClass,
+                                extendedProps: { description: ev.description }
+                            };
+                        });
+                        successCallback(formatted);
+                    }).getEvents();
+                },
+
+                eventClick: function(info) {
+                    alert('Kegiatan: ' + info.event.title + '\nKeterangan: ' + info.event.extendedProps.description);
+                }
+            });
+            calendar.render();
+        });
+
+        // Fungsi Modal
+        function openModal(start, end) {
+            document.getElementById('eventModal').style.display = 'block';
+            document.getElementById('start').value = start;
+            // FullCalendar end date biasanya +1 hari, kita kurangi jika perlu
+            document.getElementById('end').value = end ? end.substring(0, 10) : start;
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+            document.getElementById('eventForm').reset();
+        }
+
+        // Submit Form ke Apps Script
+        document.getElementById('eventForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const eventData = {
+                title: document.getElementById('title').value,
+                start: document.getElementById('start').value,
+                end: document.getElementById('end').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value
+            };
+
+            // Menampilkan loading sederhana
+            const btn = document.querySelector('.btn-save');
+            btn.innerText = 'Menyimpan...';
+            btn.disabled = true;
+
+            google.script.run.withSuccessHandler(function(res) {
+                alert(res);
+                closeModal();
+                calendar.refetchEvents(); // Refresh kalender tanpa reload halaman
+                btn.innerText = 'Simpan';
+                btn.disabled = false;
+            }).addEventToSheet(eventData);
+        };
+    </script>
+</body>
+</html>
