@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalender Kegiatan - Bidang Pengendalian & Evaluasi</title>
+    <title>Dashboard Workspace - Bidang Pengendalian & Evaluasi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -20,1030 +20,669 @@
             padding: 20px;
         }
 
-        .container-main {
-            max-width: 1400px;
+        .container-wrapper {
+            max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .header-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: slideDownIn 0.6s ease-out;
+        }
+
+        .header-section h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-section p {
+            font-size: 18px;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .header-section .subheader {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @keyframes slideDownIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card-item {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #ddd;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .month-selector {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .month-selector button {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: #667eea;
-            color: white;
-            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
 
-        .month-selector button:hover {
-            background: #5568d3;
-            transform: scale(1.1);
+        .card-item:nth-child(1) { animation-delay: 0.1s; }
+        .card-item:nth-child(2) { animation-delay: 0.2s; }
+        .card-item:nth-child(3) { animation-delay: 0.3s; }
+        .card-item:nth-child(4) { animation-delay: 0.4s; }
+        .card-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .month-selector span {
-            font-size: 18px;
-            font-weight: 600;
-            min-width: 200px;
+        .card-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 30px 25px;
             text-align: center;
-            color: #333;
-        }
-
-        .view-switcher {
-            display: flex;
-            gap: 10px;
-        }
-
-        .view-btn {
-            padding: 8px 16px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .view-btn.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .view-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .content {
-            padding: 30px;
-            min-height: 600px;
-        }
-
-        /* CALENDAR VIEW */
-        .calendar-container {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-
-        .day-header {
-            text-align: center;
-            font-weight: 700;
-            padding: 15px;
-            background: #667eea;
-            color: white;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .day-cell {
-            min-height: 120px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            padding: 10px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
 
-        .day-cell:hover {
-            background: #f8f9fa;
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-            transform: translateY(-5px);
+        .card-item.card-dashboard .card-header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
 
-        .day-cell.other-month {
-            background: #f0f0f0;
-            color: #999;
+        .card-item.card-calendar .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .day-cell.today {
-            background: #e7f3ff;
-            border-color: #667eea;
-            border-width: 3px;
+        .card-item.card-employee .card-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
-        .day-number {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: #333;
+        .card-item.card-asn .card-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
-        .day-events {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+        .card-item.card-kkp .card-header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
         }
 
-        .event-tag {
-            font-size: 11px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .card-icon {
+            font-size: 60px;
             color: white;
-            font-weight: 600;
-        }
-
-        .event-tag.category-pemeriksaan {
-            background: #dc3545;
-        }
-
-        .event-tag.category-sosialisasi {
-            background: #28a745;
-        }
-
-        .event-tag.category-koordinasi {
-            background: #ffc107;
-            color: #333;
-        }
-
-        .event-tag.category-pelatihan {
-            background: #17a2b8;
-        }
-
-        .event-tag.category-rapat {
-            background: #6f42c1;
-        }
-
-        .event-tag.category-lainnya {
-            background: #6c757d;
-        }
-
-        /* LIST VIEW */
-        .list-container {
-            display: none;
-        }
-
-        .list-container.active {
-            display: block;
-        }
-
-        .event-item {
-            background: white;
-            border-left: 5px solid #667eea;
-            padding: 20px;
             margin-bottom: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            display: block;
+            animation: iconBounce 2s ease-in-out infinite;
         }
 
-        .event-item:hover {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            transform: translateX(5px);
+        .card-item.card-dashboard .card-icon { animation-delay: 0s; }
+        .card-item.card-calendar .card-icon { animation-delay: 0.2s; }
+        .card-item.card-employee .card-icon { animation-delay: 0.4s; }
+        .card-item.card-asn .card-icon { animation-delay: 0.6s; }
+        .card-item.card-kkp .card-icon { animation-delay: 0.8s; }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .event-item.category-pemeriksaan {
-            border-left-color: #dc3545;
-        }
-
-        .event-item.category-sosialisasi {
-            border-left-color: #28a745;
-        }
-
-        .event-item.category-koordinasi {
-            border-left-color: #ffc107;
-        }
-
-        .event-item.category-pelatihan {
-            border-left-color: #17a2b8;
-        }
-
-        .event-item.category-rapat {
-            border-left-color: #6f42c1;
-        }
-
-        .event-item.category-lainnya {
-            border-left-color: #6c757d;
-        }
-
-        .event-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .event-meta {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .event-date {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .event-category {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+        .card-title {
             color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        .event-category.pemeriksaan {
-            background: #dc3545;
-        }
-
-        .event-category.sosialisasi {
-            background: #28a745;
-        }
-
-        .event-category.koordinasi {
-            background: #ffc107;
-            color: #333;
-        }
-
-        .event-category.pelatihan {
-            background: #17a2b8;
-        }
-
-        .event-category.rapat {
-            background: #6f42c1;
-        }
-
-        .event-category.lainnya {
-            background: #6c757d;
-        }
-
-        .event-description {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* LEGEND */
-        .legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            padding: 20px;
+        .card-body {
+            padding: 25px;
+            text-align: center;
             background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 20px;
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-
-        .legend-text {
+        .card-description {
+            color: #666;
             font-size: 14px;
-            color: #333;
-        }
-
-        /* MODAL */
-        .modal-backdrop {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            animation: fadeIn 0.3s;
-        }
-
-        .modal-backdrop.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        .modal-title {
-            font-size: 22px;
+        .card-button {
+            display: inline-block;
+            padding: 12px 35px;
+            border-radius: 25px;
             font-weight: 700;
-            color: #333;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: #999;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .modal-close:hover {
-            color: #333;
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s;
             font-size: 14px;
-        }
-
-        .btn-primary {
-            background: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
             color: white;
         }
 
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        .card-item.card-dashboard .card-button {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
 
-        .btn-secondary {
-            background: #ddd;
+        .card-item.card-dashboard .card-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+
+        .card-item.card-calendar .card-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-item.card-calendar .card-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .card-item.card-employee .card-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .card-item.card-employee .card-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+        }
+
+        .card-item.card-asn .card-button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .card-item.card-asn .card-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        }
+
+        .card-item.card-kkp .card-button {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: #333;
         }
 
-        .btn-secondary:hover {
-            background: #ccc;
+        .card-item.card-kkp .card-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(250, 112, 154, 0.4);
         }
 
-        .btn-add-event {
-            background: #28a745;
+        .card-button i {
+            margin-right: 8px;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            font-size: 16px;
+            text-align: center;
+            margin-top: 40px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
-        .btn-add-event:hover {
-            background: #218838;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 24px;
-            }
-
-            .controls {
-                flex-direction: column;
-            }
-
-            .month-selector {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .month-selector span {
-                min-width: auto;
-                flex: 1;
-            }
-
-            .view-switcher {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .calendar-container {
-                grid-template-columns: repeat(7, 1fr);
-                gap: 5px;
-            }
-
-            .day-cell {
-                min-height: 80px;
-                padding: 6px;
-                font-size: 12px;
-            }
-
-            .event-tag {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-
-            .legend {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .event-meta {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-
-        /* LOADING */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 400px;
+        .info-section h3 {
             font-size: 18px;
-            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-right: 15px;
+        .info-section p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .quick-tips {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            margin-top: 30px;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .quick-tips h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .quick-tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .quick-tips li {
+            padding: 8px 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .quick-tips li:before {
+            content: "✓ ";
+            margin-right: 8px;
+            color: #4facfe;
+            font-weight: bold;
+        }
+
+        .shortcuts-info {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-top: 20px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .footer-section {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 32px;
+            }
+
+            .header-section p {
+                font-size: 16px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card-icon {
+                font-size: 45px;
+            }
+
+            .card-title {
+                font-size: 20px;
+            }
+        }
+
+        .card-button.loading {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .card-button.loading span {
+            display: inline-block;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* EMPTY STATE */
-        .empty-state {
-            text-align: center;
-            padding: 60px 30px;
-            color: #999;
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
         }
 
-        .empty-state-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            opacity: 0.5;
+        .toast {
+            background: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+            animation: slideInRight 0.3s ease-out;
         }
 
-        .empty-state-text {
-            font-size: 18px;
-            margin-bottom: 20px;
+        .toast.success {
+            border-left: 4px solid #28a745;
+        }
+
+        .toast.error {
+            border-left: 4px solid #dc3545;
+        }
+
+        .toast.info {
+            border-left: 4px solid #4facfe;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .badge-featured {
+            display: inline-block;
+            background: #11998e;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-left: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-left: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
     </style>
 </head>
 <body>
-    <div class="container-main">
+    <div class="container-wrapper">
         <!-- HEADER -->
-        <div class="header">
-            <h1><i class="bi bi-calendar-event"></i> Kalender Kegiatan</h1>
-            <p>Bidang Pengendalian & Evaluasi - Bapenda Kabupaten Lombok Tengah</p>
+        <div class="header-section">
+            <h1>
+                <i class="bi bi-speedometer2"></i> Workspace Bidang
+            </h1>
+            <p>Pengendalian & Evaluasi</p>
+            <div class="subheader">Bapenda Kabupaten Lombok Tengah</div>
         </div>
 
-        <!-- CONTROLS -->
-        <div class="controls">
-            <div class="month-selector">
-                <button id="prevBtn"><i class="bi bi-chevron-left"></i></button>
-                <span id="currentMonth"></span>
-                <button id="nextBtn"><i class="bi bi-chevron-right"></i></button>
+        <!-- DASHBOARD GRID -->
+        <div class="dashboard-grid">
+            <!-- CARD 1: DASHBOARD PAJAK -->
+            <div class="card-item card-dashboard">
+                <div class="card-header">
+                    <i class="bi bi-graph-up card-icon"></i>
+                    <h2 class="card-title">Dashboard Pajak <span class="badge-featured">FEATURED</span></h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Dashboard analitik pajak dengan data realtime, grafik, dan insights untuk pengambilan keputusan strategis
+                    </p>
+                    <button class="card-button" onclick="openLink('dashboard')">
+                        <i class="bi bi-arrow-right"></i> Buka Dashboard
+                    </button>
+                </div>
             </div>
-            <div class="view-switcher">
-                <button class="view-btn active" onclick="switchView('calendar')">
-                    <i class="bi bi-calendar"></i> Kalender
-                </button>
-                <button class="view-btn" onclick="switchView('list')">
-                    <i class="bi bi-list-ul"></i> Daftar
-                </button>
+
+            <!-- CARD 2: KALENDER KEGIATAN -->
+            <div class="card-item card-calendar">
+                <div class="card-header">
+                    <i class="bi bi-calendar-event card-icon"></i>
+                    <h2 class="card-title">Kalender Kegiatan</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Lihat dan kelola jadwal kegiatan bidang secara terpusat dalam satu dashboard kalender
+                    </p>
+                    <button class="card-button" onclick="openLink('calendar')">
+                        <i class="bi bi-arrow-right"></i> Buka Kalender
+                    </button>
+                </div>
             </div>
-            <button class="btn-add-event" onclick="showAddEventModal()">
-                <i class="bi bi-plus-circle"></i> Tambah Kegiatan
-            </button>
+
+            <!-- CARD 3: KEGIATAN STAF -->
+            <div class="card-item card-employee">
+                <div class="card-header">
+                    <i class="bi bi-briefcase card-icon"></i>
+                    <h2 class="card-title">Kegiatan Staf</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Input dan pantau kegiatan harian staf dengan sistem pelaporan yang terintegrasi
+                    </p>
+                    <button class="card-button" onclick="openLink('employee')">
+                        <i class="bi bi-arrow-right"></i> Kelola Kegiatan
+                    </button>
+                </div>
+            </div>
+
+            <!-- CARD 4: MY ASN -->
+            <div class="card-item card-asn">
+                <div class="card-header">
+                    <i class="bi bi-person-badge card-icon"></i>
+                    <h2 class="card-title">MyASN Digital</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Akses portal MyASN untuk manajemen data ASN dan pengembangan karir pegawai
+                    </p>
+                    <button class="card-button" onclick="openLink('asn')">
+                        <i class="bi bi-arrow-right"></i> Masuk MyASN
+                    </button>
+                </div>
+            </div>
+
+            <!-- CARD 5: KERTAS KERJA PEMERIKSAAN -->
+            <div class="card-item card-kkp">
+                <div class="card-header">
+                    <i class="bi bi-clipboard-check card-icon"></i>
+                    <h2 class="card-title">KKP <span class="badge-new">NEW</span></h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Kelola Kertas Kerja Pemeriksaan (KKP) untuk dokumentasi dan arsip pemeriksaan pajak
+                    </p>
+                    <button class="card-button" onclick="openLink('kkp')">
+                        <i class="bi bi-arrow-right"></i> Buka KKP
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- LEGEND -->
-        <div style="padding: 30px; background: white;">
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #dc3545;"></div>
-                    <div class="legend-text">Pemeriksaan Pajak</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #28a745;"></div>
-                    <div class="legend-text">Sosialisasi</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #ffc107;"></div>
-                    <div class="legend-text">Koordinasi</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #17a2b8;"></div>
-                    <div class="legend-text">Pelatihan</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #6f42c1;"></div>
-                    <div class="legend-text">Rapat</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #6c757d;"></div>
-                    <div class="legend-text">Lainnya</div>
-                </div>
-            </div>
+        <!-- INFO SECTION -->
+        <div class="info-section">
+            <h3>💡 Informasi Penting</h3>
+            <p>Semua link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
         </div>
 
-        <!-- CONTENT -->
-        <div class="content">
-            <div id="calendarView" class="calendar-container">
-                <!-- Calendar will be rendered here -->
-            </div>
-
-            <div id="listView" class="list-container">
-                <!-- Events list will be rendered here -->
-            </div>
-
-            <div id="loadingView" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <span>Memuat kegiatan...</span>
-            </div>
+        <!-- QUICK TIPS -->
+        <div class="quick-tips">
+            <h4><i class="bi bi-lightning"></i> Tips Penggunaan</h4>
+            <ul>
+                <li>Dashboard Pajak menampilkan data realtime dari semua sistem</li>
+                <li>Kalender Kegiatan untuk perencanaan kegiatan bidang</li>
+                <li>Input kegiatan staf dilakukan setiap hari kerja</li>
+                <li>Update data MyASN untuk dokumen resmi dan kepegawaian</li>
+                <li>KKP digunakan untuk dokumentasi hasil pemeriksaan pajak</li>
+            </ul>
         </div>
-    </div>
 
-    <!-- MODAL ADD EVENT -->
-    <div id="eventModal" class="modal-backdrop">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Tambah Kegiatan Baru</h2>
-                <button class="modal-close" onclick="closeAddEventModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="eventTitle">Nama Kegiatan *</label>
-                    <input type="text" id="eventTitle" placeholder="Contoh: Pemeriksaan Pajak Hotel XYZ" required>
-                </div>
-                <div class="form-group">
-                    <label for="eventStart">Tanggal Mulai *</label>
-                    <input type="date" id="eventStart" required>
-                </div>
-                <div class="form-group">
-                    <label for="eventEnd">Tanggal Selesai *</label>
-                    <input type="date" id="eventEnd" required>
-                </div>
-                <div class="form-group">
-                    <label for="eventCategory">Kategori *</label>
-                    <select id="eventCategory" required>
-                        <option value="">-- Pilih Kategori --</option>
-                        <option value="Pemeriksaan">Pemeriksaan Pajak</option>
-                        <option value="Sosialisasi">Sosialisasi</option>
-                        <option value="Koordinasi">Koordinasi</option>
-                        <option value="Pelatihan">Pelatihan</option>
-                        <option value="Rapat">Rapat</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="eventDescription">Keterangan</label>
-                    <textarea id="eventDescription" placeholder="Tambahkan detail atau catatan penting..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeAddEventModal()">Batal</button>
-                <button class="btn btn-primary" onclick="saveEvent()">
-                    <i class="bi bi-check-circle"></i> Simpan Kegiatan
-                </button>
-            </div>
+        <!-- KEYBOARD SHORTCUTS INFO -->
+        <div class="shortcuts-info">
+            <strong>⌨️ Keyboard Shortcuts:</strong> Alt+1 (Dashboard) | Alt+2 (Kalender) | Alt+3 (Kegiatan) | Alt+4 (MyASN) | Alt+5 (KKP)
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer-section">
+            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v3.0</p>
         </div>
     </div>
 
     <script>
-        let allEvents = [];
-        let currentDate = new Date();
-        let currentView = 'calendar';
+        // Link configuration
+        const links = {
+            dashboard: 'https://nandhasar.github.io/dashboard-pajak-bapenda-/',
+            calendar: 'https://script.google.com/macros/s/AKfycbzlB7PcRm0jTRcRcE3WSR7HTNzY1rKoUVtK5v7dspYO3Sg8DMw1zrjyEopYaJHL_Fb4/exec',
+            employee: 'https://nandhasar.github.io/bapendabekarye/index.html',
+            asn: 'https://asndigital.bkn.go.id/login',
+            kkp: 'https://nandhasar.github.io/KKP_LOMBOK_TENGAH/'
+        };
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            loadEvents();
-            document.getElementById('prevBtn').addEventListener('click', previousMonth);
-            document.getElementById('nextBtn').addEventListener('click', nextMonth);
-        });
+        // Button labels
+        const buttonLabels = {
+            dashboard: 'Buka Dashboard',
+            calendar: 'Buka Kalender',
+            employee: 'Kelola Kegiatan',
+            asn: 'Masuk MyASN',
+            kkp: 'Buka KKP'
+        };
 
-        // Load events from spreadsheet
-        function loadEvents() {
-            document.getElementById('loadingView').style.display = 'flex';
-            google.script.run.withSuccessHandler(function(events) {
-                allEvents = events;
-                document.getElementById('loadingView').style.display = 'none';
-                renderCalendar();
-                renderEventsList();
-            }).getEvents();
-        }
+        // Button icons
+        const buttonIcons = {
+            dashboard: 'arrow-right',
+            calendar: 'arrow-right',
+            employee: 'arrow-right',
+            asn: 'arrow-right',
+            kkp: 'arrow-right'
+        };
 
-        // Render Calendar
-        function renderCalendar() {
-            const container = document.getElementById('calendarView');
-            container.innerHTML = '';
+        // Open link function
+        function openLink(type) {
+            const button = event.target.closest('.card-button');
+            const url = links[type];
 
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-
-            // Update header
-            const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
-                             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
-
-            // Day headers
-            const dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            dayNames.forEach(day => {
-                const header = document.createElement('div');
-                header.className = 'day-header';
-                header.textContent = day;
-                container.appendChild(header);
-            });
-
-            // First day of month
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const daysInPrevMonth = new Date(year, month, 0).getDate();
-
-            // Previous month days
-            for (let i = firstDay - 1; i >= 0; i--) {
-                const day = daysInPrevMonth - i;
-                createDayCell(container, day, month - 1, year, true);
-            }
-
-            // Current month days
-            for (let day = 1; day <= daysInMonth; day++) {
-                createDayCell(container, day, month, year, false);
-            }
-
-            // Next month days
-            const totalCells = container.querySelectorAll('.day-cell').length + 7 + firstDay;
-            const remainingDays = totalCells > (6 * 7) ? 0 : (6 * 7) - totalCells;
-            for (let day = 1; day <= remainingDays; day++) {
-                createDayCell(container, day, month + 1, year, true);
-            }
-        }
-
-        function createDayCell(container, day, month, year, isOtherMonth) {
-            const cell = document.createElement('div');
-            cell.className = 'day-cell';
-
-            if (isOtherMonth) {
-                cell.classList.add('other-month');
-            }
-
-            // Check if today
-            const today = new Date();
-            if (!isOtherMonth && day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                cell.classList.add('today');
-            }
-
-            // Normalize month for date calculation
-            let normalizedMonth = month;
-            if (month < 0) normalizedMonth = 11;
-            else if (month > 11) normalizedMonth = 0;
-
-            const cellDate = new Date(year, normalizedMonth, day);
-            const dateStr = cellDate.toISOString().split('T')[0];
-
-            // Get events for this day
-            const dayEvents = allEvents.filter(event => {
-                const eventStart = new Date(event.start);
-                const eventEnd = new Date(event.end);
-                return dateStr >= event.start && dateStr <= event.end;
-            });
-
-            // Add day number
-            const dayNumber = document.createElement('div');
-            dayNumber.className = 'day-number';
-            dayNumber.textContent = day;
-            cell.appendChild(dayNumber);
-
-            // Add events
-            const eventsDiv = document.createElement('div');
-            eventsDiv.className = 'day-events';
-            dayEvents.slice(0, 2).forEach(event => {
-                const tag = document.createElement('div');
-                tag.className = `event-tag category-${event.category.toLowerCase()}`;
-                tag.textContent = event.title;
-                tag.title = event.title;
-                eventsDiv.appendChild(tag);
-            });
-
-            if (dayEvents.length > 2) {
-                const more = document.createElement('div');
-                more.className = 'event-tag';
-                more.style.background = '#999';
-                more.textContent = `+${dayEvents.length - 2} lainnya`;
-                eventsDiv.appendChild(more);
-            }
-
-            cell.appendChild(eventsDiv);
-
-            // Add click handler
-            if (!isOtherMonth) {
-                cell.style.cursor = 'pointer';
-                cell.addEventListener('click', () => {
-                    showDayDetail(dateStr, dayEvents);
-                });
-            }
-
-            container.appendChild(cell);
-        }
-
-        // Render Events List
-        function renderEventsList() {
-            const container = document.getElementById('listView');
-            container.innerHTML = '';
-
-            if (allEvents.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
-                        <div class="empty-state-text">Belum ada kegiatan</div>
-                        <p style="font-size: 14px;">Tambahkan kegiatan baru untuk mulai merencanakan</p>
-                    </div>
-                `;
+            if (!url) {
+                showToast('Link tidak ditemukan', 'error');
                 return;
             }
 
-            // Sort events by date
-            const sorted = [...allEvents].sort((a, b) => new Date(a.start) - new Date(b.start));
+            // Add loading state
+            button.classList.add('loading');
+            button.innerHTML = '<i class="bi bi-hourglass-split"></i> <span>Membuka...</span>';
 
-            sorted.forEach(event => {
-                const item = document.createElement('div');
-                item.className = `event-item category-${event.category.toLowerCase()}`;
-
-                const startDate = new Date(event.start).toLocaleDateString('id-ID', { 
-                    weekday: 'long', 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-
-                const endDate = new Date(event.end).toLocaleDateString('id-ID', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-
-                const duration = calculateDuration(event.start, event.end);
-
-                item.innerHTML = `
-                    <div class="event-title">${event.title}</div>
-                    <div class="event-meta">
-                        <div class="event-date">
-                            <i class="bi bi-calendar-event"></i>
-                            ${startDate} hingga ${endDate}
-                        </div>
-                        <div class="event-date">
-                            <i class="bi bi-hourglass-split"></i>
-                            ${duration}
-                        </div>
-                        <span class="event-category ${event.category.toLowerCase()}">
-                            ${event.category}
-                        </span>
-                    </div>
-                    ${event.description ? `<div class="event-description">📝 ${event.description}</div>` : ''}
-                `;
-
-                container.appendChild(item);
-            });
+            // Simulate delay for better UX
+            setTimeout(() => {
+                window.open(url, '_blank');
+                
+                // Reset button
+                const originalText = buttonLabels[type];
+                const originalIcon = buttonIcons[type];
+                
+                button.classList.remove('loading');
+                button.innerHTML = `<i class="bi bi-${originalIcon}"></i> ${originalText}`;
+                
+                const displayNames = {
+                    dashboard: 'Dashboard Pajak',
+                    calendar: 'Kalender Kegiatan',
+                    employee: 'Kegiatan Staf',
+                    asn: 'MyASN Digital',
+                    kkp: 'Kertas Kerja Pemeriksaan'
+                };
+                
+                showToast(`Membuka ${displayNames[type]}...`, 'info');
+            }, 300);
         }
 
-        // Calculate duration
-        function calculateDuration(start, end) {
-            const startDate = new Date(start);
-            const endDate = new Date(end);
-            const diffTime = Math.abs(endDate - startDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-            return diffDays === 1 ? '1 hari' : `${diffDays} hari`;
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const container = document.querySelector('.toast-container') || createToastContainer();
+            const toast = document.createElement('div');
+            const iconMap = {
+                success: 'check-circle',
+                error: 'exclamation-circle',
+                info: 'info-circle'
+            };
+            
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="bi bi-${iconMap[type]}"></i>
+                ${message}
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideOutLeft 0.3s ease-in';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
 
-        // Month navigation
-        function previousMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
+        function createToastContainer() {
+            const container = document.createElement('div');
+            container.className = 'toast-container';
+            document.body.appendChild(container);
+            return container;
         }
 
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        }
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (!event.altKey) return;
 
-        // View switching
-        function switchView(view) {
-            currentView = view;
-
-            // Update buttons
-            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.closest('.view-btn').classList.add('active');
-
-            // Update content visibility
-            document.getElementById('calendarView').style.display = view === 'calendar' ? 'grid' : 'none';
-            document.getElementById('listView').style.display = view === 'list' ? 'block' : 'none';
-        }
-
-        // Modal functions
-        function showAddEventModal() {
-            document.getElementById('eventModal').classList.add('show');
-        }
-
-        function closeAddEventModal() {
-            document.getElementById('eventModal').classList.remove('show');
-            document.getElementById('eventTitle').value = '';
-            document.getElementById('eventStart').value = '';
-            document.getElementById('eventEnd').value = '';
-            document.getElementById('eventCategory').value = '';
-            document.getElementById('eventDescription').value = '';
-        }
-
-        function saveEvent() {
-            const title = document.getElementById('eventTitle').value.trim();
-            const start = document.getElementById('eventStart').value;
-            const end = document.getElementById('eventEnd').value;
-            const category = document.getElementById('eventCategory').value;
-            const description = document.getElementById('eventDescription').value.trim();
-
-            if (!title || !start || !end || !category) {
-                alert('Mohon isi semua field yang wajib (*)');
-                return;
-            }
-
-            if (new Date(end) < new Date(start)) {
-                alert('Tanggal selesai tidak boleh lebih awal dari tanggal mulai');
-                return;
-            }
-
-            const eventData = {
-                title: title,
-                start: start,
-                end: end,
-                category: category,
-                description: description
+            const shortcuts = {
+                '1': 'dashboard',
+                '2': 'calendar',
+                '3': 'employee',
+                '4': 'asn',
+                '5': 'kkp'
             };
 
-            document.querySelector('.btn-primary').textContent = 'Menyimpan...';
-            document.querySelector('.btn-primary').disabled = true;
+            if (shortcuts[event.key]) {
+                event.preventDefault();
+                const type = shortcuts[event.key];
+                window.open(links[type], '_blank');
+                
+                const displayNames = {
+                    dashboard: 'Dashboard Pajak',
+                    calendar: 'Kalender Kegiatan',
+                    employee: 'Kegiatan Staf',
+                    asn: 'MyASN Digital',
+                    kkp: 'Kertas Kerja Pemeriksaan'
+                };
+                
+                showToast(`Membuka ${displayNames[type]}...`, 'info');
+            }
+        });
 
-            google.script.run.withSuccessHandler(function(message) {
-                alert(message);
-                closeAddEventModal();
-                loadEvents();
-                document.querySelector('.btn-primary').textContent = '<i class="bi bi-check-circle"></i> Simpan Kegiatan';
-                document.querySelector('.btn-primary').disabled = false;
-            }).addEventToSheet(eventData);
-        }
-
-        // Show day detail (bonus feature)
-        function showDayDetail(date, events) {
-            if (events.length === 0) return;
-
-            const dateObj = new Date(date);
-            const dateStr = dateObj.toLocaleDateString('id-ID', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-
-            let detail = `📅 Kegiatan pada ${dateStr}:\n\n`;
-            events.forEach(event => {
-                detail += `✓ ${event.title}\n  Kategori: ${event.category}\n  ${event.description ? 'Keterangan: ' + event.description + '\n' : ''}\n`;
-            });
-
-            alert(detail);
-        }
-
-        // Refresh every 5 minutes
-        setInterval(loadEvents, 5 * 60 * 1000);
+        // Add page load animation
+        document.addEventListener('DOMContentLoaded', function() {
+            showToast('✨ Selamat datang di Workspace Bidang!', 'success');
+            
+            console.log('╔════════════════════════════════════════╗');
+            console.log('║        WORKSPACE KEYBOARD SHORTCUTS    ║');
+            console.log('╠════════════════════════════════════════╣');
+            console.log('║ Alt + 1 = Dashboard Pajak              ║');
+            console.log('║ Alt + 2 = Kalender Kegiatan            ║');
+            console.log('║ Alt + 3 = Kegiatan Staf                ║');
+            console.log('║ Alt + 4 = MyASN Digital                ║');
+            console.log('║ Alt + 5 = Kertas Kerja Pemeriksaan     ║');
+            console.log('╚════════════════════════════════════════╝');
+        });
     </script>
 </body>
 </html>
