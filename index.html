@@ -21,7 +21,7 @@
         }
 
         .container-wrapper {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -59,6 +59,22 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 5px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
         }
 
         .dashboard-grid {
@@ -108,25 +124,21 @@
             overflow: hidden;
         }
 
-        .card-item.card-dashboard .card-header {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
+        /* CATEGORY 1: CORE SYSTEMS */
+        .card-item.card-dashboard .card-header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .card-item.card-calendar .card-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-item.card-employee .card-header { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .card-item.card-asn .card-header { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .card-item.card-kkp .card-header { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
 
-        .card-item.card-calendar .card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+        /* CATEGORY 2: TAX SYSTEMS */
+        .card-item.card-otm .card-header { background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); }
+        .card-item.card-opsen .card-header { background: linear-gradient(135deg, #4158d0 0%, #c850c0 100%); }
+        .card-item.card-smartgov .card-header { background: linear-gradient(135deg, #0093e9 0%, #80d0c3 100%); }
 
-        .card-item.card-employee .card-header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .card-item.card-asn .card-header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .card-item.card-kkp .card-header {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
+        /* CATEGORY 3: SUPPORT SYSTEMS */
+        .card-item.card-spreadsheet .card-header { background: linear-gradient(135deg, #34a853 0%, #5f9b51 100%); }
+        .card-item.card-matalapak .card-header { background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%); }
 
         .card-icon {
             font-size: 60px;
@@ -135,12 +147,6 @@
             display: block;
             animation: iconBounce 2s ease-in-out infinite;
         }
-
-        .card-item.card-dashboard .card-icon { animation-delay: 0s; }
-        .card-item.card-calendar .card-icon { animation-delay: 0.2s; }
-        .card-item.card-employee .card-icon { animation-delay: 0.4s; }
-        .card-item.card-asn .card-icon { animation-delay: 0.6s; }
-        .card-item.card-kkp .card-icon { animation-delay: 0.8s; }
 
         @keyframes iconBounce {
             0%, 100% { transform: translateY(0); }
@@ -184,51 +190,35 @@
             color: white;
         }
 
-        .card-item.card-dashboard .card-button {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
+        .card-item.card-dashboard .card-button { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .card-item.card-dashboard .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4); }
 
-        .card-item.card-dashboard .card-button:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
-        }
+        .card-item.card-calendar .card-button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-item.card-calendar .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
 
-        .card-item.card-calendar .card-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+        .card-item.card-employee .card-button { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .card-item.card-employee .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4); }
 
-        .card-item.card-calendar .card-button:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
+        .card-item.card-asn .card-button { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .card-item.card-asn .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4); }
 
-        .card-item.card-employee .card-button {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
+        .card-item.card-kkp .card-button { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #333; }
+        .card-item.card-kkp .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(250, 112, 154, 0.4); }
 
-        .card-item.card-employee .card-button:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
-        }
+        .card-item.card-otm .card-button { background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); }
+        .card-item.card-otm .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4); }
 
-        .card-item.card-asn .card-button {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
+        .card-item.card-opsen .card-button { background: linear-gradient(135deg, #4158d0 0%, #c850c0 100%); }
+        .card-item.card-opsen .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(65, 88, 208, 0.4); }
 
-        .card-item.card-asn .card-button:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-        }
+        .card-item.card-smartgov .card-button { background: linear-gradient(135deg, #0093e9 0%, #80d0c3 100%); }
+        .card-item.card-smartgov .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(0, 147, 233, 0.4); }
 
-        .card-item.card-kkp .card-button {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: #333;
-        }
+        .card-item.card-spreadsheet .card-button { background: linear-gradient(135deg, #34a853 0%, #5f9b51 100%); }
+        .card-item.card-spreadsheet .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(52, 168, 83, 0.4); }
 
-        .card-item.card-kkp .card-button:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(250, 112, 154, 0.4);
-        }
+        .card-item.card-matalapak .card-button { background: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%); }
+        .card-item.card-matalapak .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(247, 183, 51, 0.4); }
 
         .card-button i {
             margin-right: 8px;
@@ -433,85 +423,186 @@
             <div class="subheader">Bapenda Kabupaten Lombok Tengah</div>
         </div>
 
-        <!-- DASHBOARD GRID -->
-        <div class="dashboard-grid">
-            <!-- CARD 1: DASHBOARD PAJAK -->
-            <div class="card-item card-dashboard">
-                <div class="card-header">
-                    <i class="bi bi-graph-up card-icon"></i>
-                    <h2 class="card-title">Dashboard Pajak <span class="badge-featured">FEATURED</span></h2>
+        <!-- CATEGORY 1: CORE SYSTEMS -->
+        <div class="category-section">
+            <div class="category-title">
+                <i class="bi bi-star-fill"></i> Sistem Utama
+            </div>
+            <div class="dashboard-grid">
+                <!-- CARD 1: DASHBOARD PAJAK -->
+                <div class="card-item card-dashboard">
+                    <div class="card-header">
+                        <i class="bi bi-graph-up card-icon"></i>
+                        <h2 class="card-title">Dashboard Pajak <span class="badge-featured">FEATURED</span></h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Dashboard analitik pajak dengan data realtime, grafik, dan insights
+                        </p>
+                        <button class="card-button" onclick="openLink('dashboard')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Dashboard analitik pajak dengan data realtime, grafik, dan insights untuk pengambilan keputusan strategis
-                    </p>
-                    <button class="card-button" onclick="openLink('dashboard')">
-                        <i class="bi bi-arrow-right"></i> Buka Dashboard
-                    </button>
+
+                <!-- CARD 2: KALENDER KEGIATAN -->
+                <div class="card-item card-calendar">
+                    <div class="card-header">
+                        <i class="bi bi-calendar-event card-icon"></i>
+                        <h2 class="card-title">Kalender Kegiatan</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Lihat dan kelola jadwal kegiatan bidang secara terpusat
+                        </p>
+                        <button class="card-button" onclick="openLink('calendar')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 3: KEGIATAN STAF -->
+                <div class="card-item card-employee">
+                    <div class="card-header">
+                        <i class="bi bi-briefcase card-icon"></i>
+                        <h2 class="card-title">Bapenda Bekarye</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Input dan pantau kegiatan harian staf
+                        </p>
+                        <button class="card-button" onclick="openLink('employee')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 4: MY ASN -->
+                <div class="card-item card-asn">
+                    <div class="card-header">
+                        <i class="bi bi-person-badge card-icon"></i>
+                        <h2 class="card-title">MyASN Digital</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Manajemen data ASN dan pengembangan karir
+                        </p>
+                        <button class="card-button" onclick="openLink('asn')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 5: KERTAS KERJA PEMERIKSAAN -->
+                <div class="card-item card-kkp">
+                    <div class="card-header">
+                        <i class="bi bi-clipboard-check card-icon"></i>
+                        <h2 class="card-title">KKP <span class="badge-new">NEW</span></h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Dokumentasi dan arsip pemeriksaan pajak
+                        </p>
+                        <button class="card-button" onclick="openLink('kkp')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- CARD 2: KALENDER KEGIATAN -->
-            <div class="card-item card-calendar">
-                <div class="card-header">
-                    <i class="bi bi-calendar-event card-icon"></i>
-                    <h2 class="card-title">Kalender Kegiatan</h2>
+        <!-- CATEGORY 2: TAX SYSTEMS -->
+        <div class="category-section">
+            <div class="category-title">
+                <i class="bi bi-receipt"></i> Sistem Pajak
+            </div>
+            <div class="dashboard-grid">
+                <!-- CARD 6: OTM -->
+                <div class="card-item card-otm">
+                    <div class="card-header">
+                        <i class="bi bi-shield-lock card-icon"></i>
+                        <h2 class="card-title">OTM</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Online Transaction Monitoring untuk keamanan transaksi pajak
+                        </p>
+                        <button class="card-button" onclick="openLink('otm')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Lihat dan kelola jadwal kegiatan bidang secara terpusat dalam satu dashboard kalender
-                    </p>
-                    <button class="card-button" onclick="openLink('calendar')">
-                        <i class="bi bi-arrow-right"></i> Buka Kalender
-                    </button>
+
+                <!-- CARD 7: OPSEN -->
+                <div class="card-item card-opsen">
+                    <div class="card-header">
+                        <i class="bi bi-building card-icon"></i>
+                        <h2 class="card-title">OPSEN PKB BBNKB</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Sistem operasional Pajak Kendaraan Bermotor & Bea Balik Nama
+                        </p>
+                        <button class="card-button" onclick="openLink('opsen')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 8: SMARTGOV -->
+                <div class="card-item card-smartgov">
+                    <div class="card-header">
+                        <i class="bi bi-cloud-check card-icon"></i>
+                        <h2 class="card-title">SmartGov</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Platform smart government untuk layanan pajak terintegrasi
+                        </p>
+                        <button class="card-button" onclick="openLink('smartgov')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- CARD 3: KEGIATAN STAF -->
-            <div class="card-item card-employee">
-                <div class="card-header">
-                    <i class="bi bi-briefcase card-icon"></i>
-                    <h2 class="card-title">Bapenda Bekarye</h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Input dan pantau kegiatan harian staf dengan sistem pelaporan yang terintegrasi
-                    </p>
-                    <button class="card-button" onclick="openLink('employee')">
-                        <i class="bi bi-arrow-right"></i> Kelola Kegiatan
-                    </button>
-                </div>
+        <!-- CATEGORY 3: SUPPORT SYSTEMS -->
+        <div class="category-section">
+            <div class="category-title">
+                <i class="bi bi-tools"></i> Sistem Pendukung
             </div>
+            <div class="dashboard-grid">
+                <!-- CARD 9: PAD 2026 SPREADSHEET -->
+                <div class="card-item card-spreadsheet">
+                    <div class="card-header">
+                        <i class="bi bi-table card-icon"></i>
+                        <h2 class="card-title">PAD 2026</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Spreadsheet data Pendapatan Asli Daerah tahun 2026
+                        </p>
+                        <button class="card-button" onclick="openLink('spreadsheet')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
 
-            <!-- CARD 4: MY ASN -->
-            <div class="card-item card-asn">
-                <div class="card-header">
-                    <i class="bi bi-person-badge card-icon"></i>
-                    <h2 class="card-title">MyASN Digital</h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Akses portal MyASN untuk manajemen data ASN dan pengembangan karir pegawai
-                    </p>
-                    <button class="card-button" onclick="openLink('asn')">
-                        <i class="bi bi-arrow-right"></i> Masuk MyASN
-                    </button>
-                </div>
-            </div>
-
-            <!-- CARD 5: KERTAS KERJA PEMERIKSAAN -->
-            <div class="card-item card-kkp">
-                <div class="card-header">
-                    <i class="bi bi-clipboard-check card-icon"></i>
-                    <h2 class="card-title">KKP <span class="badge-new">NEW</span></h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Kelola Kertas Kerja Pemeriksaan (KKP) untuk dokumentasi dan arsip pemeriksaan pajak
-                    </p>
-                    <button class="card-button" onclick="openLink('kkp')">
-                        <i class="bi bi-arrow-right"></i> Buka KKP
-                    </button>
+                <!-- CARD 10: MATALAPAK ADMIN -->
+                <div class="card-item card-matalapak">
+                    <div class="card-header">
+                        <i class="bi bi-shop card-icon"></i>
+                        <h2 class="card-title">Matalapak Admin</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Admin portal untuk manajemen marketplace pajak
+                        </p>
+                        <button class="card-button" onclick="openLink('matalapak')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -519,29 +610,30 @@
         <!-- INFO SECTION -->
         <div class="info-section">
             <h3>💡 Informasi Penting</h3>
-            <p>Semua link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
+            <p>Semua 10 link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
         </div>
 
         <!-- QUICK TIPS -->
         <div class="quick-tips">
             <h4><i class="bi bi-lightning"></i> Tips Penggunaan</h4>
             <ul>
-                <li>Dashboard Pajak menampilkan data realtime dari semua sistem</li>
-                <li>Kalender Kegiatan untuk perencanaan kegiatan bidang</li>
-                <li>Input kegiatan staf dilakukan setiap hari kerja</li>
-                <li>Update data MyASN untuk dokumen resmi dan kepegawaian</li>
-                <li>KKP digunakan untuk dokumentasi hasil pemeriksaan pajak</li>
+                <li><strong>Sistem Utama:</strong> Dashboard, Kalender, Bekarye, MyASN, KKP untuk workflow harian</li>
+                <li><strong>Sistem Pajak:</strong> OTM, OPSEN, SmartGov untuk transaksi dan operasional pajak</li>
+                <li><strong>Sistem Pendukung:</strong> PAD 2026 Spreadsheet dan Matalapak Admin untuk data & portal</li>
+                <li>Update data secara rutin agar semua sistem tetap sinkron</li>
+                <li>Hubungi Admin jika ada kendala akses atau integrasi data</li>
             </ul>
         </div>
 
         <!-- KEYBOARD SHORTCUTS INFO -->
         <div class="shortcuts-info">
-            <strong>⌨️ Keyboard Shortcuts:</strong> Alt+1 (Dashboard) | Alt+2 (Kalender) | Alt+3 (Kegiatan) | Alt+4 (MyASN) | Alt+5 (KKP)
+            <strong>⌨️ Keyboard Shortcuts:</strong><br>
+            Alt+1~5: Sistem Utama | Alt+6~8: Sistem Pajak | Alt+9~0: Sistem Pendukung
         </div>
 
         <!-- FOOTER -->
         <div class="footer-section">
-            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v3.0</p>
+            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v4.0 | 10 Aplikasi Terintegrasi</p>
         </div>
     </div>
 
@@ -552,7 +644,12 @@
             calendar: 'https://script.google.com/macros/s/AKfycbzlB7PcRm0jTRcRcE3WSR7HTNzY1rKoUVtK5v7dspYO3Sg8DMw1zrjyEopYaJHL_Fb4/exec',
             employee: 'https://nandhasar.github.io/bapendabekarye/index.html',
             asn: 'https://asndigital.bkn.go.id/login',
-            kkp: 'https://nandhasar.github.io/KKP_LOMBOK_TENGAH/'
+            kkp: 'https://nandhasar.github.io/KKP_LOMBOK_TENGAH/',
+            otm: 'https://otm.smartgov.id/login',
+            opsen: 'https://opsen.lomboktengahkab.go.id/login',
+            smartgov: 'http://103.168.246.40:45200/login',
+            spreadsheet: 'https://docs.google.com/spreadsheets/d/19OL4ufpAeA_w_AbSgewIz7hniF34ySJBxTvOxHaBwps/edit?gid=462293961#gid=462293961',
+            matalapak: 'https://matalapak.citigov.id/login'
         };
 
         // Button labels
@@ -561,16 +658,26 @@
             calendar: 'Buka Kalender',
             employee: 'Kelola Kegiatan',
             asn: 'Masuk MyASN',
-            kkp: 'Buka KKP'
+            kkp: 'Buka KKP',
+            otm: 'Masuk OTM',
+            opsen: 'Masuk OPSEN',
+            smartgov: 'Masuk SmartGov',
+            spreadsheet: 'Buka Spreadsheet',
+            matalapak: 'Masuk Matalapak'
         };
 
-        // Button icons
-        const buttonIcons = {
-            dashboard: 'arrow-right',
-            calendar: 'arrow-right',
-            employee: 'arrow-right',
-            asn: 'arrow-right',
-            kkp: 'arrow-right'
+        // Display names
+        const displayNames = {
+            dashboard: 'Dashboard Pajak',
+            calendar: 'Kalender Kegiatan',
+            employee: 'Bapenda Bekarye',
+            asn: 'MyASN Digital',
+            kkp: 'KKP',
+            otm: 'Online Transaction Monitoring',
+            opsen: 'OPSEN PKB BBNKB',
+            smartgov: 'SmartGov',
+            spreadsheet: 'PAD 2026 Spreadsheet',
+            matalapak: 'Matalapak Admin'
         };
 
         // Open link function
@@ -593,18 +700,9 @@
                 
                 // Reset button
                 const originalText = buttonLabels[type];
-                const originalIcon = buttonIcons[type];
                 
                 button.classList.remove('loading');
-                button.innerHTML = `<i class="bi bi-${originalIcon}"></i> ${originalText}`;
-                
-                const displayNames = {
-                    dashboard: 'Dashboard Pajak',
-                    calendar: 'Kalender Kegiatan',
-                    employee: 'Kegiatan Staf',
-                    asn: 'MyASN Digital',
-                    kkp: 'Kertas Kerja Pemeriksaan'
-                };
+                button.innerHTML = `<i class="bi bi-arrow-right"></i> ${originalText.split(' ')[0]}`;
                 
                 showToast(`Membuka ${displayNames[type]}...`, 'info');
             }, 300);
@@ -649,39 +747,39 @@
                 '2': 'calendar',
                 '3': 'employee',
                 '4': 'asn',
-                '5': 'kkp'
+                '5': 'kkp',
+                '6': 'otm',
+                '7': 'opsen',
+                '8': 'smartgov',
+                '9': 'spreadsheet',
+                '0': 'matalapak'
             };
 
             if (shortcuts[event.key]) {
                 event.preventDefault();
                 const type = shortcuts[event.key];
                 window.open(links[type], '_blank');
-                
-                const displayNames = {
-                    dashboard: 'Dashboard Pajak',
-                    calendar: 'Kalender Kegiatan',
-                    employee: 'Kegiatan Staf',
-                    asn: 'MyASN Digital',
-                    kkp: 'Kertas Kerja Pemeriksaan'
-                };
-                
                 showToast(`Membuka ${displayNames[type]}...`, 'info');
             }
         });
 
         // Add page load animation
         document.addEventListener('DOMContentLoaded', function() {
-            showToast('✨ Selamat datang di Workspace Bidang!', 'success');
+            showToast('✨ Selamat datang di Workspace Bidang v4.0!', 'success');
             
-            console.log('╔════════════════════════════════════════╗');
-            console.log('║        WORKSPACE KEYBOARD SHORTCUTS    ║');
-            console.log('╠════════════════════════════════════════╣');
-            console.log('║ Alt + 1 = Dashboard Pajak              ║');
-            console.log('║ Alt + 2 = Kalender Kegiatan            ║');
-            console.log('║ Alt + 3 = Kegiatan Staf                ║');
-            console.log('║ Alt + 4 = MyASN Digital                ║');
-            console.log('║ Alt + 5 = Kertas Kerja Pemeriksaan     ║');
-            console.log('╚════════════════════════════════════════╝');
+            console.log('╔════════════════════════════════════════════════════════╗');
+            console.log('║         WORKSPACE BIDANG - KEYBOARD SHORTCUTS          ║');
+            console.log('╠════════════════════════════════════════════════════════╣');
+            console.log('║ SISTEM UTAMA:                                          ║');
+            console.log('║ Alt+1 = Dashboard Pajak    │ Alt+2 = Kalender Kegiatan ║');
+            console.log('║ Alt+3 = Bapenda Bekarye    │ Alt+4 = MyASN Digital     ║');
+            console.log('║ Alt+5 = KKP                                            ║');
+            console.log('║ SISTEM PAJAK:                                          ║');
+            console.log('║ Alt+6 = OTM                │ Alt+7 = OPSEN             ║');
+            console.log('║ Alt+8 = SmartGov                                       ║');
+            console.log('║ SISTEM PENDUKUNG:                                      ║');
+            console.log('║ Alt+9 = PAD 2026           │ Alt+0 = Matalapak Admin   ║');
+            console.log('╚════════════════════════════════════════════════════════╝');
         });
     </script>
 </body>
