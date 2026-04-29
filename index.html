@@ -135,6 +135,7 @@
         .card-item.card-otm .card-header { background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); }
         .card-item.card-opsen .card-header { background: linear-gradient(135deg, #4158d0 0%, #c850c0 100%); }
         .card-item.card-smartgov .card-header { background: linear-gradient(135deg, #0093e9 0%, #80d0c3 100%); }
+        .card-item.card-sp2t .card-header { background: linear-gradient(135deg, #d4145a 0%, #fbb03b 100%); }
 
         /* CATEGORY 3: SUPPORT SYSTEMS */
         .card-item.card-spreadsheet .card-header { background: linear-gradient(135deg, #34a853 0%, #5f9b51 100%); }
@@ -213,6 +214,9 @@
 
         .card-item.card-smartgov .card-button { background: linear-gradient(135deg, #0093e9 0%, #80d0c3 100%); }
         .card-item.card-smartgov .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(0, 147, 233, 0.4); }
+
+        .card-item.card-sp2t .card-button { background: linear-gradient(135deg, #d4145a 0%, #fbb03b 100%); }
+        .card-item.card-sp2t .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(212, 20, 90, 0.4); }
 
         .card-item.card-spreadsheet .card-button { background: linear-gradient(135deg, #34a853 0%, #5f9b51 100%); }
         .card-item.card-spreadsheet .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(52, 168, 83, 0.4); }
@@ -564,6 +568,22 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- CARD 9: SP2T -->
+                <div class="card-item card-sp2t">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-text card-icon"></i>
+                        <h2 class="card-title">SP2T <span class="badge-new">NEW</span></h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Entry Surat Perintah Pemeriksaan Tertulis yang telah diantar ke masyarakat
+                        </p>
+                        <button class="card-button" onclick="openLink('sp2t')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -573,7 +593,7 @@
                 <i class="bi bi-tools"></i> Sistem Pendukung
             </div>
             <div class="dashboard-grid">
-                <!-- CARD 9: PAD 2026 SPREADSHEET -->
+                <!-- CARD 10: PAD 2026 SPREADSHEET -->
                 <div class="card-item card-spreadsheet">
                     <div class="card-header">
                         <i class="bi bi-table card-icon"></i>
@@ -589,7 +609,7 @@
                     </div>
                 </div>
 
-                <!-- CARD 10: MATALAPAK ADMIN -->
+                <!-- CARD 11: MATALAPAK ADMIN -->
                 <div class="card-item card-matalapak">
                     <div class="card-header">
                         <i class="bi bi-shop card-icon"></i>
@@ -610,7 +630,7 @@
         <!-- INFO SECTION -->
         <div class="info-section">
             <h3>💡 Informasi Penting</h3>
-            <p>Semua 10 link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
+            <p>Semua 11 link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
         </div>
 
         <!-- QUICK TIPS -->
@@ -618,22 +638,22 @@
             <h4><i class="bi bi-lightning"></i> Tips Penggunaan</h4>
             <ul>
                 <li><strong>Sistem Utama:</strong> Dashboard, Kalender, Bekarye, MyASN, KKP untuk workflow harian</li>
-                <li><strong>Sistem Pajak:</strong> OTM, OPSEN, SmartGov untuk transaksi dan operasional pajak</li>
+                <li><strong>Sistem Pajak:</strong> OTM, OPSEN, SmartGov, SP2T untuk transaksi dan operasional pajak</li>
                 <li><strong>Sistem Pendukung:</strong> PAD 2026 Spreadsheet dan Matalapak Admin untuk data & portal</li>
+                <li><strong>SP2T:</strong> Entry Surat Perintah Pemeriksaan Tertulis yang sudah diantar ke masyarakat</li>
                 <li>Update data secara rutin agar semua sistem tetap sinkron</li>
-                <li>Hubungi Admin jika ada kendala akses atau integrasi data</li>
             </ul>
         </div>
 
         <!-- KEYBOARD SHORTCUTS INFO -->
         <div class="shortcuts-info">
             <strong>⌨️ Keyboard Shortcuts:</strong><br>
-            Alt+1~5: Sistem Utama | Alt+6~8: Sistem Pajak | Alt+9~0: Sistem Pendukung
+            Alt+1~5: Sistem Utama | Alt+6~9: Sistem Pajak | Alt+0,A: Sistem Pendukung
         </div>
 
         <!-- FOOTER -->
         <div class="footer-section">
-            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v4.0 | 10 Aplikasi Terintegrasi</p>
+            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v5.0 | 11 Aplikasi Terintegrasi</p>
         </div>
     </div>
 
@@ -648,6 +668,7 @@
             otm: 'https://otm.smartgov.id/login',
             opsen: 'https://opsen.lomboktengahkab.go.id/login',
             smartgov: 'http://103.168.246.40:45200/login',
+            sp2t: 'https://st-bapenda.ntbprov.go.id/index.php',
             spreadsheet: 'https://docs.google.com/spreadsheets/d/19OL4ufpAeA_w_AbSgewIz7hniF34ySJBxTvOxHaBwps/edit?gid=462293961#gid=462293961',
             matalapak: 'https://matalapak.citigov.id/login'
         };
@@ -662,6 +683,7 @@
             otm: 'Masuk OTM',
             opsen: 'Masuk OPSEN',
             smartgov: 'Masuk SmartGov',
+            sp2t: 'Entry SP2T',
             spreadsheet: 'Buka Spreadsheet',
             matalapak: 'Masuk Matalapak'
         };
@@ -676,6 +698,7 @@
             otm: 'Online Transaction Monitoring',
             opsen: 'OPSEN PKB BBNKB',
             smartgov: 'SmartGov',
+            sp2t: 'SP2T (Surat Perintah Pemeriksaan Tertulis)',
             spreadsheet: 'PAD 2026 Spreadsheet',
             matalapak: 'Matalapak Admin'
         };
@@ -751,8 +774,9 @@
                 '6': 'otm',
                 '7': 'opsen',
                 '8': 'smartgov',
-                '9': 'spreadsheet',
-                '0': 'matalapak'
+                '9': 'sp2t',
+                '0': 'spreadsheet',
+                'a': 'matalapak'
             };
 
             if (shortcuts[event.key]) {
@@ -765,7 +789,7 @@
 
         // Add page load animation
         document.addEventListener('DOMContentLoaded', function() {
-            showToast('✨ Selamat datang di Workspace Bidang v4.0!', 'success');
+            showToast('✨ Selamat datang di Workspace Bidang v5.0!', 'success');
             
             console.log('╔════════════════════════════════════════════════════════╗');
             console.log('║         WORKSPACE BIDANG - KEYBOARD SHORTCUTS          ║');
@@ -776,9 +800,9 @@
             console.log('║ Alt+5 = KKP                                            ║');
             console.log('║ SISTEM PAJAK:                                          ║');
             console.log('║ Alt+6 = OTM                │ Alt+7 = OPSEN             ║');
-            console.log('║ Alt+8 = SmartGov                                       ║');
+            console.log('║ Alt+8 = SmartGov           │ Alt+9 = SP2T              ║');
             console.log('║ SISTEM PENDUKUNG:                                      ║');
-            console.log('║ Alt+9 = PAD 2026           │ Alt+0 = Matalapak Admin   ║');
+            console.log('║ Alt+0 = PAD 2026           │ Alt+A = Matalapak Admin   ║');
             console.log('╚════════════════════════════════════════════════════════╝');
         });
     </script>
