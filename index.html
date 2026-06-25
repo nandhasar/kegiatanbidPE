@@ -51,14 +51,8 @@
         }
 
         @keyframes slideDownIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .category-section {
@@ -100,16 +94,11 @@
         .card-item:nth-child(3) { animation-delay: 0.3s; }
         .card-item:nth-child(4) { animation-delay: 0.4s; }
         .card-item:nth-child(5) { animation-delay: 0.5s; }
+        .card-item:nth-child(6) { animation-delay: 0.6s; }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card-item:hover {
@@ -136,6 +125,7 @@
         .card-item.card-opsen .card-header { background: linear-gradient(135deg, #4158d0 0%, #c850c0 100%); }
         .card-item.card-smartgov .card-header { background: linear-gradient(135deg, #0093e9 0%, #80d0c3 100%); }
         .card-item.card-sp2t .card-header { background: linear-gradient(135deg, #d4145a 0%, #fbb03b 100%); }
+        .card-item.card-watermeter .card-header { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
 
         /* CATEGORY 3: SUPPORT SYSTEMS */
         .card-item.card-spreadsheet .card-header { background: linear-gradient(135deg, #34a853 0%, #5f9b51 100%); }
@@ -217,6 +207,9 @@
 
         .card-item.card-sp2t .card-button { background: linear-gradient(135deg, #d4145a 0%, #fbb03b 100%); }
         .card-item.card-sp2t .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(212, 20, 90, 0.4); }
+
+        .card-item.card-watermeter .card-button { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
+        .card-item.card-watermeter .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(0, 114, 255, 0.4); }
 
         .card-item.card-spreadsheet .card-button { background: linear-gradient(135deg, #34a853 0%, #5f9b51 100%); }
         .card-item.card-spreadsheet .card-button:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(52, 168, 83, 0.4); }
@@ -309,26 +302,11 @@
         }
 
         @media (max-width: 768px) {
-            .header-section h1 {
-                font-size: 32px;
-            }
-
-            .header-section p {
-                font-size: 16px;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .card-icon {
-                font-size: 45px;
-            }
-
-            .card-title {
-                font-size: 20px;
-            }
+            .header-section h1 { font-size: 32px; }
+            .header-section p { font-size: 16px; }
+            .dashboard-grid { grid-template-columns: 1fr; gap: 20px; }
+            .card-icon { font-size: 45px; }
+            .card-title { font-size: 20px; }
         }
 
         .card-button.loading {
@@ -363,32 +341,17 @@
             animation: slideInRight 0.3s ease-out;
         }
 
-        .toast.success {
-            border-left: 4px solid #28a745;
-        }
-
-        .toast.error {
-            border-left: 4px solid #dc3545;
-        }
-
-        .toast.info {
-            border-left: 4px solid #4facfe;
-        }
+        .toast.success { border-left: 4px solid #28a745; }
+        .toast.error { border-left: 4px solid #dc3545; }
+        .toast.info { border-left: 4px solid #4facfe; }
 
         @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .badge-featured {
+        .badge-featured, .badge-new {
             display: inline-block;
-            background: #11998e;
             color: white;
             padding: 4px 10px;
             border-radius: 20px;
@@ -398,17 +361,8 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .badge-new {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-left: 8px;
-            animation: pulse 2s ease-in-out infinite;
-        }
+        .badge-featured { background: #11998e; }
+        .badge-new { background: #ff6b6b; }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
@@ -584,6 +538,22 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- CARD 10: SMART WATER METER -->
+                <div class="card-item card-watermeter">
+                    <div class="card-header">
+                        <i class="bi bi-droplet-half card-icon"></i>
+                        <h2 class="card-title">Smart Water Meter <span class="badge-new">NEW</span></h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Sistem monitoring meter air tanah pintar terintegrasi oleh Cartenz
+                        </p>
+                        <button class="card-button" onclick="openLink('watermeter')">
+                            <i class="bi bi-arrow-right"></i> Buka
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -593,7 +563,7 @@
                 <i class="bi bi-tools"></i> Sistem Pendukung
             </div>
             <div class="dashboard-grid">
-                <!-- CARD 10: PAD 2026 SPREADSHEET -->
+                <!-- CARD 11: PAD 2026 SPREADSHEET -->
                 <div class="card-item card-spreadsheet">
                     <div class="card-header">
                         <i class="bi bi-table card-icon"></i>
@@ -609,7 +579,7 @@
                     </div>
                 </div>
 
-                <!-- CARD 11: MATALAPAK ADMIN -->
+                <!-- CARD 12: MATALAPAK ADMIN -->
                 <div class="card-item card-matalapak">
                     <div class="card-header">
                         <i class="bi bi-shop card-icon"></i>
@@ -630,7 +600,7 @@
         <!-- INFO SECTION -->
         <div class="info-section">
             <h3>💡 Informasi Penting</h3>
-            <p>Semua 11 link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
+            <p>Semua 12 link telah diverifikasi dan aman. Gunakan akun resmi Anda untuk login ke setiap sistem.</p>
         </div>
 
         <!-- QUICK TIPS -->
@@ -638,9 +608,9 @@
             <h4><i class="bi bi-lightning"></i> Tips Penggunaan</h4>
             <ul>
                 <li><strong>Sistem Utama:</strong> Dashboard, Kalender, Bekarye, MyASN, KKP untuk workflow harian</li>
-                <li><strong>Sistem Pajak:</strong> OTM, OPSEN, SmartGov, SP2T untuk transaksi dan operasional pajak</li>
+                <li><strong>Sistem Pajak:</strong> OTM, OPSEN, SmartGov, SP2T, Smart Water Meter untuk transaksi dan operasional pajak</li>
                 <li><strong>Sistem Pendukung:</strong> PAD 2026 Spreadsheet dan Matalapak Admin untuk data & portal</li>
-                <li><strong>SP2T:</strong> Entry Surat Perintah Pemeriksaan Tertulis yang sudah diantar ke masyarakat</li>
+                <li><strong>Water Meter:</strong> Pantau debit air tanah secara langsung (real-time)</li>
                 <li>Update data secara rutin agar semua sistem tetap sinkron</li>
             </ul>
         </div>
@@ -648,12 +618,12 @@
         <!-- KEYBOARD SHORTCUTS INFO -->
         <div class="shortcuts-info">
             <strong>⌨️ Keyboard Shortcuts:</strong><br>
-            Alt+1~5: Sistem Utama | Alt+6~9: Sistem Pajak | Alt+0,A: Sistem Pendukung
+            Alt+1~5: Sistem Utama | Alt+6~9, W: Sistem Pajak | Alt+0, A: Sistem Pendukung
         </div>
 
         <!-- FOOTER -->
         <div class="footer-section">
-            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v5.0 | 11 Aplikasi Terintegrasi</p>
+            <p>© 2026 Bidang Pengendalian & Evaluasi | Workspace v5.1 | 12 Aplikasi Terintegrasi</p>
         </div>
     </div>
 
@@ -669,6 +639,7 @@
             opsen: 'https://opsen.lomboktengahkab.go.id/login',
             smartgov: 'http://103.168.246.40:45200/login',
             sp2t: 'https://st-bapenda.ntbprov.go.id/index.php',
+            watermeter: 'https://smartwatermeter.cartenz.co.id/',
             spreadsheet: 'https://docs.google.com/spreadsheets/d/19OL4ufpAeA_w_AbSgewIz7hniF34ySJBxTvOxHaBwps/edit?gid=462293961#gid=462293961',
             matalapak: 'https://matalapak.citigov.id/login'
         };
@@ -684,6 +655,7 @@
             opsen: 'Masuk OPSEN',
             smartgov: 'Masuk SmartGov',
             sp2t: 'Entry SP2T',
+            watermeter: 'Buka Water Meter',
             spreadsheet: 'Buka Spreadsheet',
             matalapak: 'Masuk Matalapak'
         };
@@ -699,6 +671,7 @@
             opsen: 'OPSEN PKB BBNKB',
             smartgov: 'SmartGov',
             sp2t: 'SP2T (Surat Perintah Pemeriksaan Tertulis)',
+            watermeter: 'Smart Water Meter',
             spreadsheet: 'PAD 2026 Spreadsheet',
             matalapak: 'Matalapak Admin'
         };
@@ -775,6 +748,7 @@
                 '7': 'opsen',
                 '8': 'smartgov',
                 '9': 'sp2t',
+                'w': 'watermeter',
                 '0': 'spreadsheet',
                 'a': 'matalapak'
             };
@@ -789,10 +763,10 @@
 
         // Add page load animation
         document.addEventListener('DOMContentLoaded', function() {
-            showToast('✨ Selamat datang di Workspace Bidang v5.0!', 'success');
+            showToast('✨ Selamat datang di Workspace Bidang v5.1!', 'success');
             
             console.log('╔════════════════════════════════════════════════════════╗');
-            console.log('║         WORKSPACE BIDANG - KEYBOARD SHORTCUTS          ║');
+            console.log('║        WORKSPACE BIDANG - KEYBOARD SHORTCUTS           ║');
             console.log('╠════════════════════════════════════════════════════════╣');
             console.log('║ SISTEM UTAMA:                                          ║');
             console.log('║ Alt+1 = Dashboard Pajak    │ Alt+2 = Kalender Kegiatan ║');
@@ -801,6 +775,7 @@
             console.log('║ SISTEM PAJAK:                                          ║');
             console.log('║ Alt+6 = OTM                │ Alt+7 = OPSEN             ║');
             console.log('║ Alt+8 = SmartGov           │ Alt+9 = SP2T              ║');
+            console.log('║ Alt+W = Smart Water Meter                              ║');
             console.log('║ SISTEM PENDUKUNG:                                      ║');
             console.log('║ Alt+0 = PAD 2026           │ Alt+A = Matalapak Admin   ║');
             console.log('╚════════════════════════════════════════════════════════╝');
